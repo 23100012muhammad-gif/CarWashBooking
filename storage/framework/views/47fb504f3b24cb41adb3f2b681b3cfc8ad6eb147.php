@@ -1,0 +1,38 @@
+<?php $__env->startSection('title', 'Layanan - Car Wash Booking'); ?>
+
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <h2 class="mb-4">
+        <i class="bi bi-list-check"></i> Daftar Layanan Kami
+    </h2>
+    
+    <div class="row">
+        <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">
+                        <i class="bi bi-check-circle"></i> <?php echo e($service->name); ?>
+
+                    </h5>
+                    <p class="card-text"><?php echo e($service->description); ?></p>
+                    <h4 class="text-success">Rp <?php echo e(number_format($service->price, 0, ',', '.')); ?></h4>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <a href="<?php echo e(route('booking.create')); ?>" class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Pesan Layanan Ini
+                    </a>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
+    
+    <div class="alert alert-info mt-4" role="alert">
+        <i class="bi bi-info-circle"></i> 
+        <strong>Informasi:</strong> Semua layanan dilakukan oleh tenaga profesional dengan peralatan modern dan ramah lingkungan.
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/runner/workspace/resources/views/layanan.blade.php ENDPATH**/ ?>
