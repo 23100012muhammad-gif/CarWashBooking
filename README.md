@@ -18,10 +18,13 @@ Aplikasi web Laravel 8.x untuk sistem pemesanan jasa cuci mobil dengan antrian o
 
 ## Teknologi
 
-- **Laravel**: 8.x (PHP 7.4 Compatible)
+- **Laravel**: 8.x
+- **PHP**: 8.1 (using PHP 7.4-compatible syntax only)
 - **Database**: SQLite (default)
 - **Frontend**: Bootstrap 5, Blade Templates
 - **Icons**: Bootstrap Icons
+
+**Note**: While originally designed for PHP 7.4, this application runs on PHP 8.1 (Replit's available version) but uses strictly PHP 7.4-compatible syntax throughout - no PHP 8.0+ specific features are used.
 
 ## Jenis Layanan
 
