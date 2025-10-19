@@ -1,0 +1,26 @@
+Saya tetap memilih **Opsi A: Proceed with the Laravel 8.x/PHP 7.4 implementation as requested (best-effort)**.
+
+Buatlah kerangka (skeletal structure) aplikasi web Laravel untuk "Pemesanan Jasa Cuci Mobil" menggunakan **Laravel Versi 8.x** yang **100% kompatibel dengan PHP 7.4**.
+
+**PERHATIAN KRITIS (Wajib):**
+1.  **KOMPATIBILITAS PHP:** Jangan gunakan sintaks atau fitur PHP baru apa pun yang diperkenalkan di PHP 8.0 atau PHP 8.1. Pastikan semua kode (Controller, Model, Migration) menggunakan sintaks PHP 7.4 murni.
+2.  **STYLING/FRONTEND:** Gunakan **Bootstrap (versi 4 atau 5)** untuk semua *styling* dan membuat tampilan aplikasi **responsif dan profesional**. Terapkan *class* Bootstrap pada semua elemen HTML.
+
+**PERMINTAAN PENTING UNTUK MENGHINDARI ERROR COMPOSER DI PHP 7.4:**
+Selain file kode, **Sertakan juga konten lengkap dari file `composer.json`** yang sudah disetel untuk **PHP 7.4** dan `laravel/framework`: **^8.0** atau **^8.83**.
+
+Aplikasi harus memiliki dua antarmuka: **User Interface** dan **Admin Panel**.
+
+**1. Struktur Data (Migrations & Models):**
+* Model `Service`: Kolom: `name` (string), `description` (text), `price` (integer). Data Awal/Seeder: **"Cuci Luar"**, **"Cuci Dalam"**, **"Cuci Full"**, **"Salon Mobil"**.
+* Model `Order`: Kolom: `user_id` (integer), `service_type` (string), `booking_date` (datetime), `license_plate` (string), `queue_number` (integer), dan `status` (string, nilai: **'Menunggu'**, **'Proses'**, **'Selesai'**).
+
+**2. Backend (Routing & Controller):**
+* Controller Pengguna: `BookingController` dan `UserController`. Rute: `/`, `/layanan`, `/pesan/create`, `/pesan/store` (dengan logika `queue_number` otomatis), `/status-pesanan`, `/riwayat`, `/profil`.
+* Controller Admin: `AdminController`. Rute: `/admin/dashboard`, `/admin/orders` (diurutkan berdasarkan `queue_number`), `/admin/orders/{id}/update`.
+
+**3. Frontend & Partials (Blade Components):**
+* Layout: `resources/views/layouts/app.blade.php` (dengan CDN Bootstrap).
+* Partials: `partials/navbar.blade.php`, `partials/status_card.blade.php`, `partials/footer.blade.php`.
+* Views: `views/home.blade.php`, `views/layanan.blade.php`, `views/booking_form.blade.php`, `views/status.blade.php`.
+* Admin Layout dan Views: `resources/views/layouts/admin_master.blade.php`, `views/admin/orders.blade.php`.

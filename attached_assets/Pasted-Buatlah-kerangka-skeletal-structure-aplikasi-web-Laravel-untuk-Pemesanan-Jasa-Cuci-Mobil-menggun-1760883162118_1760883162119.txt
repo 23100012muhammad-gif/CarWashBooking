@@ -1,0 +1,51 @@
+Buatlah kerangka (skeletal structure) aplikasi web Laravel untuk "Pemesanan Jasa Cuci Mobil" menggunakan **Laravel Versi 8.x** yang **100% kompatibel dengan PHP 7.4**.
+
+**PERHATIAN KRITIS (Wajib):**
+1.  **KOMPATIBILITAS PHP:** Jangan gunakan sintaks atau fitur PHP baru apa pun yang diperkenalkan di PHP 8.0 atau PHP 8.1. Pastikan semua kode (Controller, Model, Migration) menggunakan sintaks PHP 7.4 murni.
+2.  **STYLING/FRONTEND:** Gunakan **Bootstrap (versi 4 atau 5)** untuk semua *styling* dan membuat tampilan aplikasi **responsif dan profesional**. Terapkan *class* Bootstrap pada semua elemen HTML (Navigasi, Form, Tabel, Tombol).
+
+Aplikasi harus memiliki dua antarmuka: **User Interface** dan **Admin Panel**.
+
+**1. Struktur Data (Migrations & Models):**
+
+* **Model `Service` (Layanan):**
+    * Kolom: `name` (string), `description` (text), `price` (integer).
+    * **Data Awal/Seeder:** Harus mencakup 4 jenis layanan utama: **"Cuci Luar"**, **"Cuci Dalam"**, **"Cuci Full"**, dan **"Salon Mobil"**.
+
+* **Model `Order` (Pemesanan):**
+    * Kolom: `user_id` (integer), `service_type` (string), `booking_date` (datetime), `license_plate` (string), `queue_number` (integer), dan `status` (string, nilai awal **'Menunggu'**. Nilai yang mungkin: **'Menunggu'**, **'Proses'**, **'Selesai'**).
+
+**2. Backend (Routing & Controller):**
+
+* **Controller Pengguna:** Buat `BookingController` dan `UserController`.
+    * **Rute Web Pengguna:**
+        * `/`: Home
+        * `/layanan`: Menampilkan Daftar Layanan **(dengan harga transparan)**.
+        * `/pesan/create`: Menampilkan Form Pemesanan **(pilihan 4 jenis layanan)**.
+        * `/pesan/store`: Proses Simpan Pesanan (`BookingController@store`), harus menyertakan **logika untuk menghasilkan `queue_number` otomatis**.
+        * `/status-pesanan`: Menampilkan status aktif.
+        * `/riwayat`: Menampilkan riwayat pesanan selesai.
+        * `/profil`: Mengelola Profil Pengguna.
+
+* **Controller Admin:** Buat `AdminController`.
+    * **Rute Web Admin (Prefix `/admin`):**
+        * `/admin/dashboard`: Dashboard Ringkasan Admin.
+        * `/admin/orders`: Daftar semua pesanan yang perlu diproses, **diurutkan berdasarkan `queue_number`**.
+        * `/admin/orders/{id}/update`: Rute POST/PUT untuk **mengubah kolom `status` pesanan**.
+
+**3. Frontend & Partials (Blade Components):**
+
+* **Layout Pengguna:** Buat `resources/views/layouts/app.blade.php`. **Sertakan Link CDN Bootstrap di sini.**
+* **Partials Pengguna (Folder `resources/views/partials`):**
+    * `partials/navbar.blade.php`: Navigasi utama **menggunakan class `navbar` Bootstrap**.
+    * `partials/status_card.blade.php`: Component untuk menampilkan Status Pengerjaan dan Nomor Antrean **menggunakan class `card` Bootstrap**.
+    * `partials/footer.blade.php`.
+
+* **Views Pengguna (Semua menggunakan layout dan styling Bootstrap):**
+    * `views/home.blade.php`
+    * `views/layanan.blade.php`: Tampilkan daftar 4 layanan dan harganya **menggunakan class `table` atau `card` Bootstrap**.
+    * `views/booking_form.blade.php`: Tampilkan form **menggunakan class `form-group`, `form-control` Bootstrap**.
+    * `views/status.blade.php`.
+
+* **Layout Admin:** Buat `resources/views/layouts/admin_master.blade.php`.
+* **Views Admin:** Buat `views/admin/orders.blade.php` yang menampilkan tabel pesanan **menggunakan class `table` Bootstrap** untuk di-update statusnya.
