@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.carwash')
 
 @section('title', 'Status Pesanan - Car Wash Booking')
 

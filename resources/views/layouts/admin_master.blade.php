@@ -24,14 +24,50 @@
                         <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.orders') }}">Kelola Pesanan</a>
+                        <a class="nav-link" href="{{ route('admin.verifications') }}">Verifikasi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.orders') }}">Kelola Proses</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.services.index') }}">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.slots.index') }}">Jadwal & Slot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.discounts.index') }}">Diskon</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">
-                            <i class="bi bi-box-arrow-left"></i> Kembali ke User
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminProfileDropdown" role="button" data-bs-toggle="dropdown">
+                            <div class="d-inline-flex align-items-center">
+                                <div class="rounded-circle bg-light text-dark d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                                {{ Auth::user()->name }}
+                            </div>
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ route('admin.profile') }}">
+                                <i class="bi bi-person-circle"></i> Profil Admin
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ route('home') }}">
+                                <i class="bi bi-eye"></i> Cek Halaman User
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="POST" action="{{ route('admin.logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="bi bi-box-arrow-right"></i> Logout Admin
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -52,5 +88,7 @@
     </main>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('styles')
+    @stack('scripts')
 </body>
 </html>

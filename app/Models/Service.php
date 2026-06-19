@@ -13,9 +13,19 @@ class Service extends Model
         'name',
         'description',
         'price',
+        'duration',
     ];
 
     protected $casts = [
         'price' => 'integer',
+        'duration' => 'integer',
     ];
+
+    /**
+     * Get the discounts for the service.
+     */
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class);
+    }
 }

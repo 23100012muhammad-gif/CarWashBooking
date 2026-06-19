@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.carwash')
 
 @section('title', 'Layanan - Car Wash Booking')
 
@@ -20,9 +20,17 @@
                     <h4 class="text-success">Rp {{ number_format($service->price, 0, ',', '.') }}</h4>
                 </div>
                 <div class="card-footer bg-transparent">
-                    <a href="{{ route('booking.create') }}" class="btn btn-primary">
+                    <a href="{{ route('booking.create', ['service_id' => $service->id]) }}" class="btn btn-primary">
                         <i class="bi bi-cart-plus"></i> Pesan Layanan Ini
                     </a>
+                    
+                    @if($service->discounts->where('active', true)->where('expires_at', '>=', now())->count() > 0)
+                        @foreach($service->discounts->where('active', true)->where('expires_at', '>=', now()) as $discount)
+                            <a href="{{ route('booking.create', ['service_id' => $service->id, 'discount_id' => $discount->id]) }}" class="btn btn-success btn-sm mt-2 d-block">
+                                <i class="bi bi-percent"></i> {{ $discount->name }} ({{ $discount->percent }}% OFF)
+                            </a>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

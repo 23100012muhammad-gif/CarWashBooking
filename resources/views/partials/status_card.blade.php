@@ -24,6 +24,20 @@
             <p class="mb-1"><strong>Jenis Layanan:</strong> {{ $order->service_type }}</p>
             <p class="mb-1"><strong>Plat Nomor:</strong> {{ $order->license_plate }}</p>
             <p class="mb-1"><strong>Tanggal Booking:</strong> {{ $order->booking_date->format('d M Y H:i') }}</p>
+            @if($order->final_price)
+                <div class="mt-2 p-2 bg-light rounded">
+                    <p class="mb-1"><strong>Harga:</strong></p>
+                    @if($order->discount_percent > 0)
+                        <p class="mb-1">
+                            <small class="text-muted">Normal: <span class="text-decoration-line-through">Rp {{ number_format($order->original_price, 0, ',', '.') }}</span></small><br>
+                            <strong class="text-success">Setelah diskon: Rp {{ number_format($order->final_price, 0, ',', '.') }}</strong><br>
+                            <small class="text-success">Diskon: {{ $order->discount_percent }}% ({{ $order->discount_name }})</small>
+                        </p>
+                    @else
+                        <p class="mb-1"><strong>Rp {{ number_format($order->final_price, 0, ',', '.') }}</strong></p>
+                    @endif
+                </div>
+            @endif
         </div>
     </div>
 </div>

@@ -16,6 +16,10 @@ class CreateOrdersTable extends Migration
             $table->string('license_plate');
             $table->integer('queue_number');
             $table->string('status')->default('Menunggu');
+            $table->integer('original_price')->nullable();
+            $table->integer('discount_percent')->nullable();
+            $table->integer('final_price')->nullable();
+            $table->string('discount_name')->nullable();
             $table->timestamps();
         });
     }
